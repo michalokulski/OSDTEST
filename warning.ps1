@@ -18,24 +18,23 @@ $HLLogo       = @"
          %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
 "@
 
-$text = "`n WARNING !" + `
-"If you proceed further, ALL content on your disk drive will be PERMANENTLY DELETED." + `
-"This includes but is not limited to:" + `
-"- All installed applications" + `
-"- All personal and system files" + `
-"- All system configurations" + `
-"Data that is deleted CANNOT BE RECOVERED. " + `
-"If you have any files or data that you wish to keep, please ensure that you have created a secure backup." + `
-"Please consider the consequences carefully before proceeding." + `
+$text = "`n WARNING !`n" + `
+"If you proceed further, ALL content on your disk drive will be PERMANENTLY DELETED.`n" + `
+"This includes but is not limited to:`n" + `
+"- All installed applications`n" + `
+"- All personal and system files`n" + `
+"- All system configurations`n" + `
+"Data that is deleted CANNOT BE RECOVERED. `n" + `
+"If you have any files or data that you wish to keep, please ensure that you have created a secure backup.`n" + `
+"Please consider the consequences carefully before proceeding.`n" + `
 "Once the data is deleted, it will be gone forever. Proceed with extreme caution.`n"
-
 
 # Create a new PowerShell process
     # Display warning message in red
     Write-Host $HLLogo -ForegroundColor DarkBlue
     Write-Host $text -ForegroundColor Red
     Write-Host "If you want to CANCEL type NO or CANCEL or manually reboot notebook! `n" -ForegroundColor Yellow
-    Write-Host "If you want to proceed type UNDERSTAND `n"
+    Write-Host "If you want to proceed type UNDERSTAND `n" -ForegroundColor Red
     
 
     # Loop until the user enters "UNDERSTAND"

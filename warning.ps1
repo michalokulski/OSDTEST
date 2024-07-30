@@ -37,7 +37,7 @@ $HLLogo       = @"
     # Loop until the user enters "UNDERSTAND"
     while ($true) {
         # Prompt the user for input
-        $input = Read-Host "Enter a command (type UNDERSTAND to exit)"
+        $input = Read-Host "Enter a command (type UNDERSTAND to wipe disk and continue with Windows OS Reinstallation)"
 
         # If the user entered "UNDERSTAND", exit the script
         if ($input -eq "UNDERSTAND") {

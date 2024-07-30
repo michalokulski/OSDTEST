@@ -20,7 +20,6 @@ $HLLogo       = @"
 
 
 # Create a new PowerShell process
-#Start-Process powershell -ArgumentList @'
     # Display warning message in red
     Write-Host $HLLogo -ForegroundColor DarkBlue
     Write-Host "`n WARNING !" -ForegroundColor Red
@@ -48,4 +47,3 @@ $HLLogo       = @"
             Restart-Computer -Force
         }
     }
-#'@

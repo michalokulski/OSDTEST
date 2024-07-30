@@ -1,6 +1,28 @@
+$HLLogo       = @"
+
+              %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+             %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+            %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+           %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+          %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+       %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
+"@
+
+
 # Create a new PowerShell process
 #Start-Process powershell -ArgumentList @'
     # Display warning message in red
+    Write-Host $HLLogo -ForegroundColor DarkBlue
     Write-Host "`n WARNING !" -ForegroundColor Red
     Write-Host "If you proceed with the provided input, ALL content on your disk drive will be PERMANENTLY DELETED." -ForegroundColor Red
     Write-Host "This includes but is not limited to:" -ForegroundColor Red

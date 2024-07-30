@@ -18,23 +18,25 @@ $HLLogo       = @"
          %%%%%%%%%%%%%%%%%%   %%%%%%%%%%%%%%%%%%
 "@
 
+$text = "`n WARNING !" + `
+"If you proceed further, ALL content on your disk drive will be PERMANENTLY DELETED." + `
+"This includes but is not limited to:" + `
+"- All installed applications" + `
+"- All personal and system files" + `
+"- All system configurations" + `
+"Data that is deleted CANNOT BE RECOVERED. " + `
+"If you have any files or data that you wish to keep, please ensure that you have created a secure backup." + `
+"Please consider the consequences carefully before proceeding." + `
+"Once the data is deleted, it will be gone forever. Proceed with extreme caution.`n"
+
 
 # Create a new PowerShell process
     # Display warning message in red
     Write-Host $HLLogo -ForegroundColor DarkBlue
-    Write-Host "`n WARNING !" -ForegroundColor Red
-    Write-Host "If you proceed with the provided input, ALL content on your disk drive will be PERMANENTLY DELETED." -ForegroundColor Red
-    Write-Host "This includes but is not limited to:" -ForegroundColor Red
-    Write-Host "- All installed applications" -ForegroundColor Red
-    Write-Host "- All personal and system files" -ForegroundColor Red
-    Write-Host "- All system configurations" -ForegroundColor Red
-    Write-Host "Data that is deleted in this manner CANNOT BE RECOVERED. " -ForegroundColor Red
-    Write-Host "If you have any files or data that you wish to keep, please ensure that you have created a secure backup." -ForegroundColor Red
-    Write-Host "Please consider the consequences carefully before proceeding." -ForegroundColor Red
-    Write-Host "Once the data is deleted, it will be gone forever. Proceed with extreme caution.`n" -ForegroundColor Red
-
-    Write-Host "`n"
-    Write-Host "If you do NOT WANT to Continue type NO or manually reboot notebook! `n" -ForegroundColor Yellow
+    Write-Host $text -ForegroundColor Red
+    Write-Host "If you want to CANCEL type NO or CANCEL or manually reboot notebook! `n" -ForegroundColor Yellow
+    Write-Host "If you want to proceed type UNDERSTAND `n"
+    
 
     # Loop until the user enters "UNDERSTAND"
     while ($true) {

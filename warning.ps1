@@ -10,7 +10,7 @@
     Write-Host "Data that is deleted in this manner CANNOT BE RECOVERED. " -ForegroundColor Red
     Write-Host "If you have any files or data that you wish to keep, please ensure that you have created a secure backup." -ForegroundColor Red
     Write-Host "Please consider the consequences carefully before proceeding." -ForegroundColor Red
-    Write Host "Once the data is deleted, it will be gone forever. Proceed with extreme caution.`n" -ForegroundColor Red
+    Write-Host "Once the data is deleted, it will be gone forever. Proceed with extreme caution.`n" -ForegroundColor Red
 
     # Loop until the user enters "UNDERSTAND"
     while ($true) {

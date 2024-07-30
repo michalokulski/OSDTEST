@@ -1,7 +1,7 @@
 # Create a new PowerShell process
 #Start-Process powershell -ArgumentList @'
     # Display warning message in red
-    Write-Host "`n ⚠ WARNING ⚠" -ForegroundColor Red
+    Write-Host "`n WARNING !" -ForegroundColor Red
     Write-Host "If you proceed with the provided input, ALL content on your disk drive will be PERMANENTLY DELETED. This includes but is not limited to:" -ForegroundColor Red
     Write-Host "- All installed applications" -ForegroundColor Red
     Write-Host "- All personal and system files" -ForegroundColor Red

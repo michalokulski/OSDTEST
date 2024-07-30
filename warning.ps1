@@ -33,6 +33,9 @@ $HLLogo       = @"
     Write-Host "Please consider the consequences carefully before proceeding." -ForegroundColor Red
     Write-Host "Once the data is deleted, it will be gone forever. Proceed with extreme caution.`n" -ForegroundColor Red
 
+    Write-Host "`n"
+    Write-Host "If you do NOT WANT to Continue type NO or manually reboot notebook! `n" -ForegroundColor Yellow
+
     # Loop until the user enters "UNDERSTAND"
     while ($true) {
         # Prompt the user for input

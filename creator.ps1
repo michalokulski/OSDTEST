@@ -25,9 +25,9 @@ If you proceed further, ALL content on your disk drive might be PERMANENTLY DELE
 "@
 
 # Define the commands for each input
-$command1 = { Write-Output "Executing Command 1" }
-$command2 = { Write-Output "Executing Command 2" }
-$command3 = { Write-Output "Executing Command 3" }
+$command1 = { StartOSDCloud "-OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Enterprise -OSActivation Volume -Restart -ZTI }
+$command2 = { StartOSDCloud -FindImageFile -OSImageIndex 1 -Restart -ZTI }
+$command3 = { New-OSDCloudUSB -fromIsoUrl #TBD# }
 $command4 = { Write-Output "Executing Command 4" }
 
 # Function to execute the appropriate command based on input
@@ -51,10 +51,10 @@ function Execute-Command {
     Write-Host $HLLogo -ForegroundColor DarkBlue
     Write-Host $text -ForegroundColor Red
     Write-Host "1 - Rebuild Windows OS using Azure `n" -ForegroundColor Yellow
-    Write-Host "1 - Rebuild Windows OS using Offline Windows 10 Image `n" -ForegroundColor Yellow
-    Write-Host "1 - Create Windows OS reinstallation USB `n" -ForegroundColor Yellow
-    Write-Host "1 - Update Windows OS reinstallation USB `n" -ForegroundColor Yellow
+    Write-Host "2 - Rebuild Windows OS using Offline Windows 10 Image `n" -ForegroundColor Yellow
+    Write-Host "3 - Create Windows OS reinstallation USB `n" -ForegroundColor Yellow
+    Write-Host "4 - Update Windows OS reinstallation USB `n" -ForegroundColor Yellow
 # Example usage
-    $input = Read-Host "Enter input (1, 2, or 3)"
+    $input = Read-Host "Enter input (1, 2, 3, or 4)"
     Execute-Command -input $input
     

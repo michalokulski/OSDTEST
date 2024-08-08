@@ -25,7 +25,7 @@ If you proceed further, ALL content on your disk drive might be PERMANENTLY DELE
 "@
 
 # Define the commands for each input
-$command1 = { StartOSDCloud "-OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Enterprise -OSActivation Volume -Restart -ZTI }
+$command1 = { StartOSDCloud -OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Enterprise -OSActivation Volume -Restart -ZTI }
 $command2 = { StartOSDCloud -FindImageFile -OSImageIndex 1 -Restart -ZTI }
 $command3 = { New-OSDCloudUSB -fromIsoUrl #TBD# }
 $command4 = { Write-Output "Executing Command 4" }

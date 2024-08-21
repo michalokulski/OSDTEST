@@ -1,13 +1,21 @@
 #!/bin/bash
 
-# Step 1: Download Ventoy from Github
+# Define variables
 VENTOY_URL="https://github.com/ventoy/Ventoy/releases/download/v1.0.99/ventoy-1.0.99-linux.tar.gz"
 DOWNLOAD_DIR="$HOME/downloads/Ventoy"
-mkdir -p "$DOWNLOAD_DIR"
-wget -O "$DOWNLOAD_DIR/ventoy.tar.gz" "$VENTOY_URL"
+VENTOY_DIR="$DOWNLOAD_DIR/ventoy-1.0.99"
 
-# Step 2: Unpack archive into $home/downloads/Ventoy
-tar -xzf "$DOWNLOAD_DIR/ventoy.tar.gz" -C "$DOWNLOAD_DIR"
+# Check if Ventoy is already downloaded and unpacked
+if [ -d "$VENTOY_DIR" ]; then
+    echo "Ventoy is already in the right place."
+else
+    # Step 1: Download Ventoy from Github
+    mkdir -p "$DOWNLOAD_DIR"
+    wget -O "$DOWNLOAD_DIR/ventoy.tar.gz" "$VENTOY_URL"
+
+    # Step 2: Unpack archive into $home/downloads/Ventoy
+    tar -xzf "$DOWNLOAD_DIR/ventoy.tar.gz" -C "$DOWNLOAD_DIR"
+fi
 
 # Step 3: Create menu with warning message and list USB drives
 echo "WARNING: All content of the selected USB stick will be removed!"
@@ -17,7 +25,7 @@ lsblk -o NAME,SIZE,MODEL | grep -E 'sd[b-z]$'
 read -p "Enter the device name (e.g., sdb): " DEVICE
 
 # Step 4: Run Ventoy2Disk.sh with option to select specific drive
-sudo "$DOWNLOAD_DIR/ventoy-1.0.99/Ventoy2Disk.sh" -i /dev/"$DEVICE"
+sudo "$VENTOY_DIR/Ventoy2Disk.sh" -i /dev/"$DEVICE"
 
 # Step 5: Mount the right partition for the selected USB device
 MOUNT_POINT="/mnt/ventoy"

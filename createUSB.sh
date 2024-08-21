@@ -2,7 +2,7 @@
 
 # Define variables
 VENTOY_URL="https://github.com/ventoy/Ventoy/releases/download/v1.0.99/ventoy-1.0.99-linux.tar.gz"
-DOWNLOAD_DIR="$HOME/downloads/Ventoy"
+DOWNLOAD_DIR="$HOME/Downloads/Ventoy"
 VENTOY_DIR="$DOWNLOAD_DIR/ventoy-1.0.99"
 
 # Check if Ventoy is already downloaded and unpacked

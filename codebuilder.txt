@@ -1,0 +1,56 @@
+## Online
+# REQUIRED TO BE DONE ON WINDOWS OS
+# VIRTUAL MACHINE NEED TO HAVE GOT INSTALLED: WINDOWS ADK & WINDOWS PE ADD-ON
+ 
+#Requires -RunAsAdministrator
+Set-ExecutionPolicy RemoteSigned -Force
+Install-Module OSD -Force
+Import-Module OSD
+# Base to perform any customization
+# In a nutshell, an OSDCloud Workspace is a copy of the OSDCloud Template that you can customize with Configuration Files, Wallpaper, Drivers, and Startup Configuration. 
+# Since it is a copy of your OSDCloud Template, this allows you to create multiple OSDCloud Workspaces that are customized with different configurations.
+New-OSDCloudTemplate -Name HLAG
+Set-OSDCloudWorkspace C:\OSDCloudDev
+Set-OSDCloudTemplate -Name 'HLAG'
+ 
+Edit-OSDCloudWinPE -StartOSDCloud "-OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Enterprise -OSActivation Volume -Restart -ZTI" -CloudDriver * -Wallpaper C:\Users\admin\Downloads\wallpaper.jpg
+#Moded with safe information!
+Edit-OSDCloudWinPE -StartOSDCloud "-OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Enterprise -OSActivation Volume -Restart -ZTI" -Wallpaper C:\Users\admin\Downloads\wallpaper.jpg -CloudDriver * -StartURL https://raw.githubusercontent.com/michalokulski/OSDTEST/main/warning.ps1
+
+
+## Offline
+
+Set-ExecutionPolicy RemoteSigned -Force
+Install-Module OSD -Force
+Import-Module OSD
+# Base to perform any customization
+# In a nutshell, an OSDCloud Workspace is a copy of the OSDCloud Template that you can customize with Configuration Files, Wallpaper, Drivers, and Startup Configuration. 
+# Since it is a copy of your OSDCloud Template, this allows you to create multiple OSDCloud Workspaces that are customized with different configurations.
+New-OSDCloudTemplate -Name HLAG
+Set-OSDCloudWorkspace C:\OSDCloudDev
+Set-OSDCloudTemplate -Name 'HLAG'
+$OSDPath = Get-OSDCloudTemplate
+#CleanUp OSDCloud Workspace Media
+$KeepTheseDirs = @('boot','efi','en-us','sources','fonts','resources')
+Get-ChildItem $OSDPath\Media | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
+Get-ChildItem $OSDPath\Media\Boot | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
+Get-ChildItem $OSDPath\Media\EFI\Microsoft\Boot | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
+#Edit WinPE and rebuild ISO
+Edit-OSDCloudWinPE -Wallpaper C:\Users\admin\Downloads\wallpaper.jpg -CloudDriver *
+#Download .wim File
+New-OSDCloudOSWimFile -OSActivation Volume -OSEdition Enterprise -OSLanguage en-us -OSName "Windows 10 22H2 x64"
+$esd = (Get-ChildItem -Path 'C:\OSDCloud\OS\Windows 10 22H2' -Recurse -Filter '*.esd' -ErrorAction SilentlyContinue).Name
+Convert-EsdToWim -esdFullName "C:\OSDCloud\OS\Windows 10 22H2\$esd" -wimFullName "$(Get-OSDCloudWorkspace)\Media\OSDCloud\OS\install.wim"
+#Remove not needed editions
+Dism /Delete-Image /ImageFile:C:\OSDCloudDev\Media\OSDCloud\OS\install.wim /Index:6 /CheckIntegrity
+Dism /Delete-Image /ImageFile:C:\OSDCloudDev\Media\OSDCloud\OS\install.wim /Index:5 /CheckIntegrity
+Dism /Delete-Image /ImageFile:C:\OSDCloudDev\Media\OSDCloud\OS\install.wim /Index:4 /CheckIntegrity
+Dism /Delete-Image /ImageFile:C:\OSDCloudDev\Media\OSDCloud\OS\install.wim /Index:2 /CheckIntegrity
+Dism /Delete-Image /ImageFile:C:\OSDCloudDev\Media\OSDCloud\OS\install.wim /Index:1 /CheckIntegrity
+#Validation that only Enterprise is inside Image
+DISM /Get-WimInfo /WimFile:"$(Get-OSDCloudWorkspace)\Media\OSDCloud\OS\install.wim"
+
+Edit-OSDCloudWinPE -StartOSDCloud "-OSName 'D:\OSDCloud\OS\install.wim' -OSLanguage en-us -OSEdition Enterprise -OSActivation Volume -Restart -ZTI" -Wallpaper C:\Users\admin\Downloads\wallpaper.jpg -CloudDriver * -StartURL https://raw.githubusercontent.com/michalokulski/OSDTEST/main/warning.ps1
+Edit-OSDCloudWinPE -StartOSDCloud "-FindImageFile -OSImageIndex 1 -Restart -ZTI" -Wallpaper C:\Users\admin\Downloads\wallpaper.jpg -CloudDriver * -StartURL https://raw.githubusercontent.com/michalokulski/OSDTEST/main/warning.ps1
+#New-OSDCloudISO
+#Start-OSDCloud -FindImageFile -OSImageIndex 1 -Restart -ZTI

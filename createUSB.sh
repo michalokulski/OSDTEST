@@ -25,10 +25,10 @@ lsblk -o NAME,SIZE,MODEL | grep -E 'sd[a-z]'
 read -p "Enter the device name (e.g., sda): " DEVICE
 
 # Step 4: Run Ventoy2Disk.sh with option to select specific drive
-sudo "$VENTOY_DIR/Ventoy2Disk.sh" -i /dev/"$DEVICE"
+sudo "$VENTOY_DIR/Ventoy2Disk.sh" -i /dev/"$DEVICE" -L HLAG_DARP
 
 # Step 5: Mount the right partition for the selected USB device
-MOUNT_POINT="/mnt/ventoy"
+MOUNT_POINT="/mnt/HLAG_DARP"
 sudo mkdir -p "$MOUNT_POINT"
 sudo mount /dev/"${DEVICE}2" "$MOUNT_POINT"
 

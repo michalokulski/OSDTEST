@@ -20,9 +20,9 @@ fi
 # Step 3: Create menu with warning message and list USB drives
 echo "WARNING: All content of the selected USB stick will be removed!"
 echo "Please select a USB drive from the list below:"
-lsblk -o NAME,SIZE,MODEL | grep -E 'sd[b-z]$'
+lsblk -o NAME,SIZE,MODEL | grep -E 'sd[a-z]'
 
-read -p "Enter the device name (e.g., sdb): " DEVICE
+read -p "Enter the device name (e.g., sda): " DEVICE
 
 # Step 4: Run Ventoy2Disk.sh with option to select specific drive
 sudo "$VENTOY_DIR/Ventoy2Disk.sh" -i /dev/"$DEVICE"

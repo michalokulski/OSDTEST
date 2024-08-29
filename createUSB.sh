@@ -2,6 +2,7 @@
 
 # Define variables
 VENTOY_URL="https://github.com/ventoy/Ventoy/releases/download/v1.0.99/ventoy-1.0.99-linux.tar.gz"
+HL_THEME_URL="https://github.com/michalokulski/OSDTEST/raw/main/themes.zip"
 DOWNLOAD_DIR="$HOME/Downloads/Ventoy"
 VENTOY_DIR="$DOWNLOAD_DIR/ventoy-1.0.99"
 
@@ -42,11 +43,13 @@ sudo mount /dev/"${DEVICE}2" "$MOUNT_POINT2"
 #wget -O "$MOUNT_POINT/file2" "$FILE2_URL"
 
 #Step 7: Modification of Ventoy GUI
-
+#Download of themes.zip (contains complete theme with HL background)
+wget -O "$DOWNLOAD_DIR/themes.zip" "$HL_THEME_URL"
+sudo unzip -o "$DOWNLOAD_DIR/themes" -d "/mnt/VTOYEFI/grub/"
 
 
 # Unmount the partition
-sudo umount "$MOUNT_POINT"
-sudo umount "$MOUNT_POINT2"
+#sudo umount "$MOUNT_POINT"
+#sudo umount "$MOUNT_POINT2"
 
 echo "Ventoy installation and file copying completed successfully!"
